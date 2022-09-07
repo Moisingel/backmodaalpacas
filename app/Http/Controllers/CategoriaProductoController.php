@@ -11,6 +11,8 @@ class CategoriaProductoController extends Controller
 {
     use ResponseApi;
 
+
+
     public function create(Request $request)
     {
         try {
@@ -74,6 +76,19 @@ class CategoriaProductoController extends Controller
             foreach ($categorias as $cat) {
                 $cat->categoria;
                 $cat->productos;
+            }
+            return $this->successResponseWithData($categorias);
+        } catch (\Exception $e) {
+            return $this->errorResponse($e->getMessage());
+        }
+    }
+
+    public function getAllWithChildrens(Request $request)
+    {
+        try {
+            $categorias = CategoriaProducto::all();
+            foreach ($categorias as $cat) {
+                $cat->categorias;
             }
             return $this->successResponseWithData($categorias);
         } catch (\Exception $e) {

@@ -137,6 +137,23 @@ class ProductoController extends Controller
             return $this->errorResponse($e->getMessage());
         }
     }
+
+    public function getByCategory($category_id)
+    {
+        try {
+            $productos = Producto::where('CATEGORY_PRODUCTS_id', $category_id);
+            foreach ($productos as $p) {
+                $p->categoria;
+                $p->precios;
+                $p->imagenes;
+            }
+            // throw new \Exception('probando error');
+            return $this->successResponseWithData($productos);
+        } catch (\Exception $e) {
+            return $this->errorResponse($e->getMessage());
+        }
+    }
+
     public function getAllNotInPublication(Request $request)
     {
         try {
