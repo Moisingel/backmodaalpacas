@@ -39,7 +39,7 @@ class ProductoController extends Controller
             }
             $price = ProductoPrice::create([
                 'amount' => $prod_data->amount,
-                'productos_id' => $producto->id
+                'PRODUCTS_id' => $producto->id
             ]);
             return $this->successResponseWithData($producto);
         } catch (\Exception $e) {
@@ -80,7 +80,7 @@ class ProductoController extends Controller
                 $precios->delete();
                 ProductoPrice::create([
                     'amount' => $prod_data->amount,
-                    'productos_id' => $id
+                    'PRODUCTS_id' => $id
                 ]);
             }
             return $this->successResponseWithData($producto);
@@ -202,6 +202,9 @@ class ProductoController extends Controller
     {
         try {
             $producto = Producto::findOrFail($id);
+            $producto->categoria;
+            $producto->precios;
+            $producto->imagenes;
             return $this->successResponseWithData($producto);
         } catch (\Exception $e) {
             return $this->errorResponse($e->getMessage());

@@ -16,8 +16,8 @@ class CreateCategoryTable extends Migration
         Schema::create('CATEGORY_PRODUCTS', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('parent_category_id');
-
+            $table->string('urlImg');
+            $table->unsignedBigInteger('parent_category_id')->nullable();
             $table->foreign('parent_category_id')->references('id')->on('CATEGORY_PRODUCTS');
 
             $table->softDeletes();

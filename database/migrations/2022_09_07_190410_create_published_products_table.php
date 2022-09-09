@@ -15,7 +15,7 @@ class CreatePublishedProductsTable extends Migration
     {
         Schema::create('PUBLISHED_PRODUCTS', function (Blueprint $table) {
             $table->id();
-            $table->integer('priority');
+            $table->integer('priority')->nullable();
             $table->unsignedBigInteger('PRODUCTS_id');
             $table->unsignedBigInteger('USERS_id');
             $table->unsignedBigInteger('CATEGORY_PRODUCTS_id');

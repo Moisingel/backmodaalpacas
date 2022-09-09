@@ -17,6 +17,8 @@ class CreateProductosTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
+            $table->string('colors');
+            $table->string('sizes');
             $table->unsignedBigInteger('CATEGORY_PRODUCTS_id');
             $table->foreign('CATEGORY_PRODUCTS_id')->references('id')->on('CATEGORY_PRODUCTS');
             $table->softDeletes();
