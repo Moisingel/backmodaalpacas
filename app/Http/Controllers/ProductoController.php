@@ -74,9 +74,9 @@ class ProductoController extends Controller
                     $coun++;
                 }
             }
-            $prices = ProductoPrice::where('amount', '=', $request->amount)->where('productos_id', '=', $id);
+            $prices = ProductoPrice::where('amount', '=', $request->amount)->where('PRODUCTS_id', '=', $id);
             if (($prices->count()) == 0) {
-                $precios = ProductoPrice::where('productos_id', '=', $id);
+                $precios = ProductoPrice::where('PRODUCTS_id', '=', $id);
                 $precios->delete();
                 ProductoPrice::create([
                     'amount' => $prod_data->amount,
