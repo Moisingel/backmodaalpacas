@@ -19,21 +19,23 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['prefix' => 'public'], function () {
-    Route::group(['prefix' => 'publicaciones'], function () {
-        Route::get('', 'App\Http\Controllers\PublicacionController@create');
-    });
+    Route::get('categorias', 'App\Http\Controllers\CategoriaProductoController@getAllWithChildrens');
+    // Route::get('productos/{category_id}', 'App\Http\Controllers\ProductoController@getAll');
+    Route::get('product/{id}', 'App\Http\Controllers\ProductoController@getOne');
+    Route::get('publicaciones/{CATEGORY_PRODUCTS_id}', 'App\Http\Controllers\PublicacionController@getByCategory');
+    Route::get('categories-on-publications', 'App\Http\Controllers\PublicacionController@getCategoriesInPublication');
 });
 Route::group(['prefix' => 'users'], function () {
     Route::post('login', 'App\Http\Controllers\UserController@login');
     Route::get('loginverify', 'App\Http\Controllers\UserController@loginverify');
 });
-// Route::group(['prefix'=>'admin','middleware' => 'auth:api'],function(){
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth:api'], function () {
+    // Route::group(['prefix' => 'admin'], function () {
     Route::group(['prefix' => 'categoria'], function () {
         Route::post('', 'App\Http\Controllers\CategoriaProductoController@create');
         Route::get('', 'App\Http\Controllers\CategoriaProductoController@getAll');
         Route::get('/{id}', 'App\Http\Controllers\CategoriaProductoController@getOne');
-        Route::put('/{id}', 'App\Http\Controllers\CategoriaProductoController@update');
+        Route::post('update/{id}', 'App\Http\Controllers\CategoriaProductoController@update');
         Route::delete('/{id}', 'App\Http\Controllers\CategoriaProductoController@destroy');
         Route::get('restore/{id}', 'App\Http\Controllers\CategoriaProductoController@restore');
     });
@@ -62,11 +64,11 @@ Route::group(['prefix' => 'admin'], function () {
         Route::delete('/{id}', 'App\Http\Controllers\ProductoController@destroy');
     });
     Route::group(['prefix' => 'producto-imagen'], function () {
-        Route::post('', 'App\Http\Controllers\ProductoController@create');
-        Route::get('', 'App\Http\Controllers\ProductoController@getAll');
-        Route::get('/{id}', 'App\Http\Controllers\ProductoController@getOne');
-        Route::put('/{id}', 'App\Http\Controllers\ProductoController@update');
-        Route::delete('/{id}', 'App\Http\Controllers\ProductoController@destroy');
+        Route::post('', 'App\Http\Controllers\ImagenController@create');
+        Route::get('', 'App\Http\Controllers\ImagenController@getAll');
+        Route::get('/{id}', 'App\Http\Controllers\ImagenController@getOne');
+        Route::put('/{id}', 'App\Http\Controllers\ImagenController@update');
+        Route::delete('/{id}', 'App\Http\Controllers\ImagenController@destroy');
     });
     Route::group(['prefix' => 'publicacion'], function () {
         Route::post('', 'App\Http\Controllers\PublicacionController@create');

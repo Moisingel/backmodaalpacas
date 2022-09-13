@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Producto;
+use App\Models\CategoriaProducto;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Models\PublicacionProducto;
 
 class PublicacionController extends Controller
@@ -24,6 +23,49 @@ class PublicacionController extends Controller
             return response()->json([
                 "success" => false,
                 "msg" => "Ocurrió un error",
+                "data" => $e
+            ]);
+        }
+    }
+
+
+    public function getByCategory(int $CATEGORY_PRODUCTS_id, Request $request)
+    {
+        $publicaciones = PublicacionProducto::where('CATEGORY_PRODUCTS_id', $CATEGORY_PRODUCTS_id)->get();
+        foreach ($publicaciones as $p) {
+            $p->categoria;
+            $p->producto->categoria;
+            $p->producto->precios;
+            $p->producto->imagenes;
+            // $p->user;
+        }
+
+        return response()->json([
+            "success" => true,
+            "msg" => 'Lista de publicaciones',
+            "data" => $publicaciones
+        ]);
+    }
+
+    public function getCategoriesInPublication()
+    {
+        try {
+            $ids_categoria = PublicacionProducto::select('CATEGORY_PRODUCTS_id')->get();
+            $ids = [];
+            foreach ($ids_categoria as $item) {
+                $ids[] = $item->CATEGORY_PRODUCTS_id;
+            }
+            $categorias = CategoriaProducto::whereIn('id', array_unique($ids))->get();
+            foreach ($categorias as $cat) {
+                $cat->categoria;
+            }
+            return response()->json([
+                "success" => true,
+                "data" => $categorias
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                "success" => false,
                 "data" => $e
             ]);
         }

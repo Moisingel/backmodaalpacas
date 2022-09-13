@@ -17,7 +17,7 @@ class ProductoPrice extends Model
 
     protected $fillable = [
         'amount',
-        'productos_id',
+        'PRODUCTS_id',
     ];
 
     protected $hidden = [

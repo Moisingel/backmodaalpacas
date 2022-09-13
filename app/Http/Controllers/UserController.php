@@ -57,7 +57,6 @@ class UserController extends Controller
     {
         $credentials = ['email' => $request->email, 'password' => $request->password];
 
-        // if ( !$token = Auth::guard('examenceid')->setTTL(1)->attempt($credentials) ){
         if (!$token = Auth::guard('api')->attempt($credentials)) {
             return response()->json(['error' => 'Verifica tu usuario y contraseña'], 401);
         }
@@ -67,7 +66,7 @@ class UserController extends Controller
 
     public function register(Request $request)
     {
-        $us = DB::select('SELECT * FROM users WHERE email=?', [$request->email]);
+        $us = DB::select('SELECT * FROM USERS WHERE email=?', [$request->email]);
         if (count($us) > 0) {
             return response()->json([
                 "success" => "false",
@@ -95,8 +94,6 @@ class UserController extends Controller
             'password' => Hash::make($request->password), //Hash::make  bcrypt
         ]);
         return response()->json([
-            "msg1" => "Se añadio balotario para examen",
-            "msg2" => "Se creo el acceso para el examen",
             "user" => $user
         ]);
     }

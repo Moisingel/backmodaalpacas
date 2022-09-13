@@ -17,6 +17,7 @@ class User extends Authenticatable implements JWTSubject
 {
     use Notifiable, SoftDeletes;
 
+    protected $table = 'USERS';
     /**
      * The attributes that are mass assignable.
      *
@@ -75,10 +76,5 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
-    }
-
-    public function grlPersona()
-    {
-        return $this->belongsTo('App\GrlPersona', 'iPersId');
     }
 }

@@ -39,7 +39,7 @@ class ProductoController extends Controller
             }
             $price = ProductoPrice::create([
                 'amount' => $prod_data->amount,
-                'productos_id' => $producto->id
+                'PRODUCTS_id' => $producto->id
             ]);
             return $this->successResponseWithData($producto);
         } catch (\Exception $e) {
@@ -80,7 +80,7 @@ class ProductoController extends Controller
                 $precios->delete();
                 ProductoPrice::create([
                     'amount' => $prod_data->amount,
-                    'productos_id' => $id
+                    'PRODUCTS_id' => $id
                 ]);
             }
             return $this->successResponseWithData($producto);
@@ -137,6 +137,23 @@ class ProductoController extends Controller
             return $this->errorResponse($e->getMessage());
         }
     }
+
+    public function getByCategory($category_id)
+    {
+        try {
+            $productos = Producto::where('CATEGORY_PRODUCTS_id', $category_id);
+            foreach ($productos as $p) {
+                $p->categoria;
+                $p->precios;
+                $p->imagenes;
+            }
+            // throw new \Exception('probando error');
+            return $this->successResponseWithData($productos);
+        } catch (\Exception $e) {
+            return $this->errorResponse($e->getMessage());
+        }
+    }
+
     public function getAllNotInPublication(Request $request)
     {
         try {
@@ -185,6 +202,9 @@ class ProductoController extends Controller
     {
         try {
             $producto = Producto::findOrFail($id);
+            $producto->categoria;
+            $producto->precios;
+            $producto->imagenes;
             return $this->successResponseWithData($producto);
         } catch (\Exception $e) {
             return $this->errorResponse($e->getMessage());
