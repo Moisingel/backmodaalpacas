@@ -37,6 +37,7 @@ class PublicacionController extends Controller
             $p->producto->categoria;
             $p->producto->precios;
             $p->producto->imagenes;
+            $p->producto->colores;
             // $p->user;
         }
 
@@ -159,6 +160,7 @@ class PublicacionController extends Controller
             $p->producto->categoria;
             $p->producto->precios;
             $p->producto->imagenes;
+            $p->producto->colores;
             $p->user;
         }
 

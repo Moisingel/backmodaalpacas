@@ -48,4 +48,9 @@ class Producto extends Model
     {
         return $this->hasMany('App\Models\ProductoImage', 'PRODUCTS_id', 'id');
     }
+
+    public function colores()
+    {
+        return $this->hasMany('App\Models\ProductoColor', 'PRODUCTS_id', 'id');
+    }
 }
