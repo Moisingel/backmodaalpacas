@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Models\CategoriaProducto;
 use App\Http\Traits\ResponseApi;
-use Illuminate\Validation\Rules\Exists;
+use App\Models\CategoriaProducto;
+use Illuminate\Http\Request;
 
 class CategoriaProductoController extends Controller
 {
     use ResponseApi;
-
 
 
     public function create(Request $request)
@@ -21,7 +18,7 @@ class CategoriaProductoController extends Controller
             $files = $request->file("file")[0];
 
             if ($files) {
-                $nameFile = time() . '-' . $files->getClientOriginalName();
+                $nameFile = time() . '.' . $files->getClientOriginalExtension();
                 $path = $files->storeAs('images', $nameFile);
                 $path = 'storage/' . $path;
             }
@@ -110,11 +107,7 @@ class CategoriaProductoController extends Controller
     public function getAll(Request $request)
     {
         try {
-            $categorias = CategoriaProducto::all();
-            foreach ($categorias as $cat) {
-                $cat->categoria;
-                $cat->productos;
-            }
+            $categorias = CategoriaProducto::with('categorias', 'productos')->get();
             return $this->successResponseWithData($categorias);
         } catch (\Exception $e) {
             return $this->errorResponse($e->getMessage());
@@ -124,10 +117,7 @@ class CategoriaProductoController extends Controller
     public function getAllWithChildrens(Request $request)
     {
         try {
-            $categorias = CategoriaProducto::all();
-            foreach ($categorias as $cat) {
-                $cat->categorias;
-            }
+            $categorias = CategoriaProducto::with('categorias')->get();
             return $this->successResponseWithData($categorias);
         } catch (\Exception $e) {
             return $this->errorResponse($e->getMessage());
