@@ -6,20 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ProductoImage extends Model
+class productoColor extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = 'PRODUCTS_IMAGES';
+    protected $table = 'PRODUCTS_COLORS';
     protected $primaryKey = 'id';
     public $timestamps = true;
 
     protected $fillable = [
-        'PRODUCTS_id',
-        'PRODUCTS_COLORS_id',
-        'url',
-        'order',
+        'name',
+        'urlImg',
+        'PRODUCTS_id'
     ];
 
     protected $hidden = [

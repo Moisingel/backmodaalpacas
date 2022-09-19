@@ -130,6 +130,7 @@ class ProductoController extends Controller
                 $p->categoria;
                 $p->precios;
                 $p->imagenes;
+                $p->colores;
             }
             // throw new \Exception('probando error');
             return $this->successResponseWithData($productos);
@@ -146,6 +147,7 @@ class ProductoController extends Controller
                 $p->categoria;
                 $p->precios;
                 $p->imagenes;
+                $p->colores;
             }
             // throw new \Exception('probando error');
             return $this->successResponseWithData($productos);
@@ -163,6 +165,7 @@ class ProductoController extends Controller
                 $p->categoria;
                 $p->precios;
                 $p->imagenes;
+                $p->colores;
             }
             // throw new \Exception('probando error');
             return $this->successResponseWithData($productos);
@@ -179,6 +182,7 @@ class ProductoController extends Controller
                 $p->categoria;
                 $p->precios;
                 $p->imagenes;
+                $p->colores;
             }
             // throw new \Exception('probando error');
             return $this->successResponseWithData($productos);
@@ -205,6 +209,7 @@ class ProductoController extends Controller
             $producto->categoria;
             $producto->precios;
             $producto->imagenes;
+            $producto->colores;
             return $this->successResponseWithData($producto);
         } catch (\Exception $e) {
             return $this->errorResponse($e->getMessage());
