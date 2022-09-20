@@ -18,7 +18,8 @@ class CategoriaProductoController extends Controller
             $files = $request->file("file")[0];
 
             if ($files) {
-                $nameFile = time() . '.' . $files->getClientOriginalExtension();
+                // concat date expression until microseconds and extension original
+                $nameFile = date('YmdHisu') . '.' . $files->getClientOriginalExtension();
                 $path = $files->storeAs('images', $nameFile);
                 $path = 'storage/' . $path;
             }
@@ -42,8 +43,8 @@ class CategoriaProductoController extends Controller
         try {
             if ($request->file("file")) {
                 $files = $request->file("file")[0];
-                $nameFile = time() . '-' . $files->getClientOriginalName();
-                $path = $files->storeAs('images', $nameFile);
+                $nameFile = date('u') . '.' . $files->getClientOriginalExtension();
+                $path = $files->store('images');
                 $path = 'storage/' . $path;
             } else {
                 $path = null;

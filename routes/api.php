@@ -71,7 +71,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:api'], function () {
         Route::delete('/{id}', 'App\Http\Controllers\ImagenController@destroy');
     });
     Route::group(['prefix' => 'producto-color'], function () {
-        Route::post('', 'App\Http\Controllers\ColorController@create');
+        Route::post('', 'App\Http\Controllers\ColorController@store');
         Route::get('', 'App\Http\Controllers\ColorController@getAll');
         Route::get('/{id}', 'App\Http\Controllers\ColorController@getOne');
         Route::put('/{id}', 'App\Http\Controllers\ColorController@update');
