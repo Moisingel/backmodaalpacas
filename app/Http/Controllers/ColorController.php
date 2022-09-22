@@ -43,7 +43,21 @@ class ColorController extends Controller
             return $this->errorResponse($e->getMessage());
         }
     }
-
+    public function uploadImage($id,Request $request){
+        try{
+            $file = $request->file('file');
+            $productColor = ProductoColor::findOrFail($id);
+            if ($file) {
+                $nameFile = time() . '-' . $file->getClientOriginalName();
+                $path = $file->storeAs('images', $nameFile);
+                $path = 'storage/' . $path;
+                $productColor->update(['urlImg' => $path]);
+            }
+            return $this->successResponseWithData($productColor);
+        } catch(\Exception $e) {
+            return $this->errorResponse($e->getMessage());
+        }
+    }
     public function update($id,Request $request){
         try {
             $color = ProductoColor::findOrFail($id);

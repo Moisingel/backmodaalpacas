@@ -75,6 +75,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:api'], function () {
         Route::get('', 'App\Http\Controllers\ColorController@getAll');
         Route::get('/{id}', 'App\Http\Controllers\ColorController@getOne');
         Route::put('/{id}', 'App\Http\Controllers\ColorController@update');
+        Route::post('/{id}/imagen', 'App\Http\Controllers\ColorController@uploadImage');
         Route::delete('/{id}', 'App\Http\Controllers\ColorController@destroy');
     });
 
